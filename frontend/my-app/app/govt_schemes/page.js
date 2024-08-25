@@ -1,38 +1,106 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import schemes from '../../govt_schemes.json';
 
 export default function GovtSchemes() {
-    const [state, setState]=useState()
-    const [error, setError]=useState(null)
-    useEffect(()=>{
-        const getState=async()=>{
-            try{
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    const lat = position.coords.latitude;
-                    const long = position.coords.longitude;          
-                    const res = await fetch(`https://apis.mappls.com/advancedmaps/v1/${process.env.GEOCODE_KEY}/rev_geocode?lat=${lat}&lng=${long}`)
-                    if (res.ok){
-                        const result = await res.json()
-                        setState(result.results[0].state)
-                    }
-                    else{
-                        const e = await res.json()
-                        setError(e)
-                    }
-                })
-            }
-            catch(e){
-                console.log(e)
-                setError(e)
-            }
-        }
-        getState()
-    },[])
-    if (error) {
-        return <div className="text-red-500 font-semibold text-center mt-6">{error}</div>;
-    }
+  const [state, setState] = useState(null);
+  const [stateSchemes, setStateSchemes] = useState([]);
+  const [error, setError] = useState(null);
+  const IndiaSchemes = schemes['India'];
+
+  useEffect(() => {
+    const getState = async () => {
+      try {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const lat = position.coords.latitude;
+          const long = position.coords.longitude;
+          
+          const res = await fetch(
+            `https://apis.mappls.com/advancedmaps/v1/${process.env.GEOCODE_KEY}/rev_geocode?lat=${lat}&lng=${long}`
+          );
+          
+          if (res.ok) {
+            const result = await res.json();
+            const detectedState = result.results[0].state;
+            setState(detectedState);
+            setStateSchemes(schemes[detectedState] || []); // Safely handle non-existing state
+          } else {
+            const e = await res.json();
+            setError(e.message || "Failed to fetch state information");
+          }
+        });
+      } catch (e) {
+        console.log(e);
+        setError("Geolocation is not supported or user denied the request.");
+      }
+    };
     
+    getState();
+  }, []);
+
+  if (error) {
+    return <div className="text-red-500 font-semibold text-center mt-6">{error}</div>;
+  }
+
   return (
-    <div>page</div>
-  )
+    <div className="p-4 text-white">
+      {state ? (
+        <>
+          <h2 className="text-2xl font-semibold mb-4">Schemes in {state}</h2>
+          {stateSchemes.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {stateSchemes.map((scheme, index) => (
+                <div key={index} className="border p-4 rounded-md shadow-md">
+                  <h3 className="text-lg font-semibold">{scheme.name_of_scheme}</h3>
+                  <p>{scheme.description}</p>
+                  <p className="font-medium mt-2">Eligibility: {scheme.eligibility}</p>
+                  <a
+                    href={scheme.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    More Information
+                  </a>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No specific schemes found for {state}.</p>
+          )}
+        </>
+      ) : (
+        <p>Loading location...</p>
+      )}
+
+      {IndiaSchemes ? (
+        <>
+          <h2 className="text-2xl font-semibold mb-4 mt-8">Schemes in India</h2>
+          {IndiaSchemes.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {IndiaSchemes.map((scheme, index) => (
+                <div key={index} className="border p-4 rounded-md shadow-md">
+                  <h3 className="text-lg font-semibold">{scheme.name_of_scheme}</h3>
+                  <p>{scheme.description}</p>
+                  <p className="font-medium mt-2">Eligibility: {scheme.eligibility}</p>
+                  <a
+                    href={scheme.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    More Information
+                  </a>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No specific schemes found for India.</p>
+          )}
+        </>
+      ) : (
+        <p>Loading schemes...</p>
+      )}
+    </div>
+  );
 }
