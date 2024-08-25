@@ -16,7 +16,7 @@ const get_suggestions = async(weatherData)=>{
     - Country : ${weatherData.sys.country}
     - Region ; ${weatherData.name}
    
-    Provide general agricultural suggestions and warnings for optimal crop management. Also give recommendations regarding which plants to grow. (in 130 words, give it in points, without formatting)
+    Provide general agricultural suggestions and warnings for optimal crop management. Also give recommendations regarding which plants to grow. (in 110 words, give it in points, without formatting)
     `;
 
     const result = await model.generateContent(prompt);
