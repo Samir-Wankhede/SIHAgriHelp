@@ -31,7 +31,7 @@ export default function Dashboard() {
       const parsedLine = line
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
         .replace(/\*(.*?)\*/g, '<em>$1</em>').replace('-',''); 
-      return <p key={index} dangerouslySetInnerHTML={{ __html: parsedLine.trim() }} className="text-base text-gray-800 mb-2" />;
+      return <p key={index} dangerouslySetInnerHTML={{ __html: parsedLine.trim() }} className="text-base mb-2" />;
     }});
     return lines;
   };
@@ -94,7 +94,7 @@ export default function Dashboard() {
     <h3 className="text-2xl font-bold mb-4 text-gray-200">Today's Suggestions:</h3>
     <ul className="space-y-3">
       {suggestions.map((suggestion, index) => (
-        <p key={index} className="text-lg text-white  border-b pb-2 last:border-none">{suggestion}</p>
+        <li key={index} className="text-lg text-gray-100 border-b pb-2 last:border-none">{suggestion}</li>
       ))}
     </ul>
   </div>
