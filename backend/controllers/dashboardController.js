@@ -33,7 +33,50 @@ export const today_details=async(req,res)=>{
         console.log(weatherData)
         const result = await get_suggestions(weatherData)
         console.log(result)
-        return res.status(200).json({result, weatherData})
+        const f = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${process.env.WEATHER_API_KEY}`)
+        const forecast = await f.json()
+        const dailyData = {};
+
+   
+        forecast.list.forEach(entry => {
+            const date = new Date(entry.dt * 1000).toISOString().split('T')[0]; 
+            if (!dailyData[date]) {
+                dailyData[date] = {
+                    tempSum: 0,
+                    humiditySum: 0,
+                    weatherConditions: {},
+                    count: 0,
+                    precipitationSum: 0
+                };
+            }
+            dailyData[date].tempSum += entry.main.temp;
+            dailyData[date].humiditySum += entry.main.humidity;
+            dailyData[date].precipitationSum += entry.rain ? entry.rain['3h'] : 0;
+            dailyData[date].count += 1;
+
+        
+            const weather = entry.weather[0].main;
+            if (!dailyData[date].weatherConditions[weather]) {
+                dailyData[date].weatherConditions[weather] = 0;
+            }
+            dailyData[date].weatherConditions[weather] += 1;
+        });
+
+        
+        const dailyAverages = Object.keys(dailyData).map(date => {
+            const dayData = dailyData[date];
+            const weather = Object.keys(dayData.weatherConditions).reduce((a, b) => dayData.weatherConditions[a] > dayData.weatherConditions[b] ? a : b);
+            return {
+                date,
+                avgTemp: (dayData.tempSum / dayData.count).toFixed(2),
+                avgHumidity: (dayData.humiditySum / dayData.count).toFixed(2),
+                totalPrecipitation: dayData.precipitationSum.toFixed(2),
+                dominantWeather: weather
+            };
+        });
+
+        console.log(dailyAverages);
+        return res.status(200).json({result, weatherData, dailyAverages})
     }
     catch(e){
         return res.status(400).json(e)
