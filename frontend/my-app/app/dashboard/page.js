@@ -50,6 +50,7 @@ export default function Dashboard() {
             const { result: s, weatherData: w } = await response.json();
             setSuggestions(parseMarkdown(s));
             setWeatherData(w);
+            console.log(w)
           } else {
             const e = await response.json();
             setError(e.error);
@@ -64,6 +65,7 @@ export default function Dashboard() {
       }
     }
     fetchSuggestions();
+    
   }, []);
 
   if (error) {
@@ -82,11 +84,12 @@ export default function Dashboard() {
         </ul>
       </div>
 
-      {/* Weather Data Section */}
-      <div className={`relative p-6 max-w-4xl mx-auto rounded-lg shadow-lg ${weatherStyles?.gradient}`} style={{ backgroundImage: `url(${weatherStyles?.image})`, backgroundSize: 'cover' }}>
+     
+      {weatherData && (
+        <div className={`relative p-6 max-w-4xl mx-auto rounded-lg shadow-lg ${weatherStyles[weatherData.weather[0].main].gradient}`} style={{ backgroundImage: `url(${weatherStyles[weatherData.weather[0].main].image})`, backgroundSize: 'cover', backgroundBlendMode: 'overlay', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="relative z-10 text-white">
-          {weatherData && (
+          
             <>
               <h1 className="text-3xl font-bold mb-6 text-center">{weatherData.name} - Weather Dashboard</h1>
 
@@ -170,9 +173,10 @@ export default function Dashboard() {
                 </div>
               </div>
             </>
-          )}
+          
         </div>
       </div>
+      )}
     </div>
   );
 }
