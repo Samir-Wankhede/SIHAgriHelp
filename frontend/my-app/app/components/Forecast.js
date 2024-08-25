@@ -8,8 +8,8 @@ const Styles = {
       gradient: 'bg-gradient-to-br from-blue-100 via-blue-200 to-blue-500', 
     },
     'Clear': {
-      icon: <FontAwesomeIcon icon={faSun} style={{ color: 'yellow',fontSize: '20' }} />,
-      gradient: 'bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600', 
+      icon: <FontAwesomeIcon icon={faSun} style={{ color: 'orange',fontSize: '20' }} />,
+      gradient: 'bg-gradient-to-br from-yellow-100 via-yellow-200 to-yellow-400', 
     },
     'Atmosphere': {
       icon: <FontAwesomeIcon icon={faSmog} style={{ color: 'gray',fontSize: '20' }} />,
@@ -17,7 +17,7 @@ const Styles = {
     },
     'Snow': {
       icon: <FontAwesomeIcon icon={faSnowflake} style={{ color: 'lightblue',fontSize: '20' }} />,
-      gradient: 'bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400', 
+      gradient: 'bg-gradient-to-br from-white via-blue-50 to-blue-200', 
     },
     'Rain': {
       icon: <FontAwesomeIcon icon={faCloudShowersHeavy} style={{ color: 'blue' ,fontSize: '20'}} />,

@@ -9,7 +9,7 @@ const setLocalStorage = (key, data) => {
     localStorage.setItem(key, JSON.stringify({ data, expiry }));
   };
 
-  const getLocalStorage = (key) => {
+const getLocalStorage = (key) => {
     const item = localStorage.getItem(key);
     if (!item) return null;
     const { data, expiry } = JSON.parse(item);

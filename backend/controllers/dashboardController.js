@@ -26,6 +26,7 @@ const get_suggestions = async(weatherData)=>{
 
 export const today_details=async(req,res)=>{
     const {lat,long}=req.body
+    
     console.log(lat,long)
     try{
         const r = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.WEATHER_API_KEY}`)
