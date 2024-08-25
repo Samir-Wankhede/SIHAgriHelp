@@ -14,8 +14,9 @@ const get_suggestions = async(weatherData)=>{
     - Wind Speed: ${weatherData.wind.speed}
     - Rain in 1h : ${weatherData.rain?weatherData.rain['1h'] : "no available data"}
     - Country : ${weatherData.sys.country}
+    - Region ; ${weatherData.name}
    
-    Provide general agricultural suggestions and warnings for optimal crop management. (in 150 words, give it in points)
+    Provide general agricultural suggestions and warnings for optimal crop management. Also give recommendations regarding which plants to grow. (in 150 words, give it in points, without formatting)
     `;
 
     const result = await model.generateContent(prompt);
@@ -25,11 +26,14 @@ const get_suggestions = async(weatherData)=>{
 
 export const today_details=async(req,res)=>{
     const {lat,long}=req.body
+    console.log(lat,long)
     try{
         const r = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.WEATHER_API_KEY}`)
         const weatherData = await r.json()
+        console.log(weatherData)
         const result = await get_suggestions(weatherData)
-        return res.status(200).json(result)
+        console.log(result)
+        return res.status(200).json({result, weatherData})
     }
     catch(e){
         return res.status(400).json(e)
