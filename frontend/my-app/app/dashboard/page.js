@@ -24,11 +24,12 @@ export default function Dashboard() {
 
   const parseMarkdown = (text) => {
     const lines = text.split('\n').map((line, index) => {
+        if (line!=''){
       const parsedLine = line
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
         .replace(/\*(.*?)\*/g, '<em>$1</em>').replace('-',''); 
       return <p key={index} dangerouslySetInnerHTML={{ __html: parsedLine.trim() }} className="text-base text-gray-800 mb-2" />;
-    });
+    }});
     return lines;
   };
 
@@ -78,7 +79,7 @@ export default function Dashboard() {
       {/* Suggestions section */}
       <div className='col-span-1'>
         <h3 className="text-2xl font-bold mb-4">Today's Suggestions:</h3>
-        <ul className="list-disc space-y-2">
+        <ul className="space-y-2">
           {suggestions.map((suggestion, index) => (
             <li key={index} className="text-lg">{suggestion}</li>
           ))}
