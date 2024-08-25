@@ -12,6 +12,7 @@ export default function Navbar() {
         <div className="text-2xl font-semibold">AgriHelp</div>
         <div className="hidden md:flex items-center space-x-6">
           <a href="/" className="hover:text-gray-300 transition duration-300">Home</a>
+          <a href="/govt_schemes" className="hover:text-gray-300 transition duration-300">Govt Schemes</a>
           <a href="/yield-prediction" className="hover:text-gray-300 transition duration-300">Yield Prediction</a>
           <a href="/disease-prediction" className="hover:text-gray-300 transition duration-300">Disease Prediction</a>
           <a href="/settings" className="hover:text-gray-300 transition duration-300">Settings</a>
@@ -29,6 +30,7 @@ export default function Navbar() {
       </div>
       <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} bg-gray-900 text-gray-100 p-4`}>
         <a href="/" className="block py-2 px-4 hover:bg-gray-800">Home</a>
+        <a href="/govt_schemes" className="block py-2 px-4 hover:bg-gray-800">Govt Schemes</a>
         <a href="/yield-prediction" className="block py-2 px-4 hover:bg-gray-800">Yield Prediction</a>
         <a href="/disease-prediction" className="block py-2 px-4 hover:bg-gray-800">Disease Prediction</a>
         <a href="/settings" className="block py-2 px-4 hover:bg-gray-800">Settings</a>

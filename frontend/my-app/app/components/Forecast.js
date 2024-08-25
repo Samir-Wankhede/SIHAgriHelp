@@ -37,35 +37,35 @@ export default function Forecast({forecast}) {
     console.log(forecast)
     console.log(1)
   return (
-    <div className="grid grid-cols-6 gap-2 p-2">
-            {forecast.map((day, index) => {
-                const weatherStyle = Styles[day.dominantWeather] || Styles['Clear'];
-                return (
-                    <div
-                        key={index}
-                        className={`relative p-4 rounded-lg border border-gray-300 shadow-md ${weatherStyle.gradient}`}
-                    >
-                        <div className="flex items-center justify-between mb-2">
-                            <div className="text-sm font-semibold">{day.date}</div>
-                            <div>{weatherStyle.icon}</div>
-                        </div>
-                        <div className="flex flex-col space-y-1">
-                            <div className="flex items-center">
-                                <FontAwesomeIcon icon={faThermometerHalf} className="mr-2 text-gray-800" />
-                                <span className="text-sm">Avg Temp: {(day.avgTemp - 273.15).toFixed(2)}°C</span>
-                            </div>
-                            <div className="flex items-center">
-                                <FontAwesomeIcon icon={faTint} className="mr-2 text-gray-800" />
-                                <span className="text-sm">Humidity: {day.avgHumidity}%</span>
-                            </div>
-                            <div className="flex items-center">
-                                <FontAwesomeIcon icon={faCloudShowersHeavy} className="mr-2 text-gray-800" />
-                                <span className="text-sm">Precipitation: {day.totalPrecipitation} mm</span>
-                            </div>
-                        </div>
-                    </div>
-                );
-            })}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 p-4">
+  {forecast.map((day, index) => {
+    const weatherStyle = Styles[day.dominantWeather] || Styles['Clear'];
+    return (
+      <div
+        key={index}
+        className={`relative p-4 rounded-lg border border-gray-300 shadow-md ${weatherStyle.gradient}`}
+      >
+        <div className="flex items-center justify-between mb-2">
+          <div className="text-sm font-semibold">{day.date}</div>
+          <div>{weatherStyle.icon}</div>
         </div>
+        <div className="flex flex-col space-y-1">
+          <div className="flex items-center">
+            <FontAwesomeIcon icon={faThermometerHalf} className="mr-2 text-gray-800" />
+            <span className="text-sm">Avg Temp: {(day.avgTemp - 273.15).toFixed(2)}°C</span>
+          </div>
+          <div className="flex items-center">
+            <FontAwesomeIcon icon={faTint} className="mr-2 text-gray-800" />
+            <span className="text-sm">Humidity: {day.avgHumidity}%</span>
+          </div>
+          <div className="flex items-center">
+            <FontAwesomeIcon icon={faCloudShowersHeavy} className="mr-2 text-gray-800" />
+            <span className="text-sm">Precipitation: {day.totalPrecipitation} mm</span>
+          </div>
+        </div>
+      </div>
+    );
+  })}
+</div>
   )
 }
