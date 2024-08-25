@@ -1,5 +1,6 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Papa from 'papaparse';
 
 const CropForm = () => {
     const [formData, setFormData] = useState({
@@ -14,9 +15,31 @@ const CropForm = () => {
         pesticide: '',
     });
 
+    const [crops, setCrops] = useState([]);
+    const [states, setStates] = useState([]);
+
+    useEffect(() => {
+        // Fetch and parse the CSV file
+        Papa.parse('/archive/crop_yield.csv', {
+            download: true,
+            header: true,
+            complete: (result) => {
+                const data = result.data;
+                const uniqueCrops = [...new Set(data.map(item => item.Crop))];
+                const uniqueStates = [...new Set(data.map(item => item.State))];
+                setCrops(uniqueCrops);
+                setStates(uniqueStates);
+            },
+            error: (error) => {
+                console.error('Error parsing CSV:', error);
+            }
+        });
+    }, []);
+
     const handleChange = (e) => {
         setFormData({
-            ...formData, [e.target.name]: e.target.value,
+            ...formData,
+            [e.target.name]: e.target.value,
         });
     };
 
@@ -52,10 +75,9 @@ const CropForm = () => {
                         required
                     >
                         <option value="">Select Crop</option>
-                        <option value="Wheat">Wheat</option>
-                        <option value="Rice">Rice</option>
-                        <option value="Maize">Maize</option>
-                        {/* Add more crop options here */}
+                        {crops.map((crop, index) => (
+                            <option key={index} value={crop}>{crop}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="flex flex-col">
@@ -95,10 +117,9 @@ const CropForm = () => {
                         required
                     >
                         <option value="">Select State</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Karnataka">Karnataka</option>
-                        {/* Add more state options here */}
+                        {states.map((state, index) => (
+                            <option key={index} value={state}>{state}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="flex flex-col">
