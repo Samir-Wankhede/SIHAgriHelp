@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloud, faSun, faSmog, faSnowflake, faCloudShowersHeavy, faCloudRain, faBolt, faTint, faWind, faThermometerHalf } from '@fortawesome/free-solid-svg-icons'
+import CalendarIcon from './CalendarIcon';
 
 const Styles = {
     'Clouds': {
@@ -45,9 +46,13 @@ export default function Forecast({forecast}) {
         key={index}
         className={`relative p-4 rounded-lg border border-gray-300 shadow-md ${weatherStyle.gradient}`}
       >
-        <div className="flex items-center justify-between mb-2">
-          <div className="text-sm font-semibold">{day.date}</div>
-          <div>{weatherStyle.icon}</div>
+        <div className="flex items-center mb-4 space-x-4 ">
+          <div className="flex-1 text-center ml-6">
+            <CalendarIcon date={day.date} />
+          </div>
+          <div className="ml-auto self-end">
+            {weatherStyle.icon}
+          </div>
         </div>
         <div className="flex flex-col space-y-1">
           <div className="flex items-center">
