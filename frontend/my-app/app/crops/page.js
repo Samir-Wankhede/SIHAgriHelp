@@ -6,7 +6,7 @@ import CropForm from '../../components/CropForm';
 const CropsPage = () => {
   return (
     <div>
-      <h1>Crop Data Entry</h1>
+      
       <CropForm />
     </div>
   );
