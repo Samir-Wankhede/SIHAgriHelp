@@ -3,15 +3,19 @@ import React, { useEffect, useState } from 'react';
 import Weather from '../components/weather';
 import Forecast from '../components/forecast';
 
-const weatherStyles = {
-    Clear: { image: '/images/clear.png', gradient: 'bg-gradient-to-r from-yellow-500 to-orange-500' },
-    Clouds: { image: '/images/cloudy.png', gradient: 'bg-gradient-to-r from-gray-300 to-gray-500' },
-    Rain: { image: '/images/rain.png', gradient: 'bg-gradient-to-r from-blue-500 to-gray-500' },
-    Drizzle: { image: '/images/drizzle.png', gradient: 'bg-gradient-to-r from-lightblue-400 to-blue-500' },
-    Thunderstorm: { image: '/images/thunderstorm.png', gradient: 'bg-gradient-to-r from-gray-700 to-black' },
-    Snow: { image: '/images/snow.png', gradient: 'bg-gradient-to-r from-white to-gray-300' },
-    Atmosphere: { image: '/images/atmosphere.png', gradient: 'bg-gradient-to-r from-gray-500 to-gray-700' },
-    Extreme: { image: '/images/extreme.png', gradient: 'bg-gradient-to-r from-red-500 to-yellow-700' },
+const setLocalStorage = (key, data) => {
+    const now = new Date();
+    const expiry = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours later
+    localStorage.setItem(key, JSON.stringify({ data, expiry }));
+  };
+
+  const getLocalStorage = (key) => {
+    const item = localStorage.getItem(key);
+    if (!item) return null;
+    const { data, expiry } = JSON.parse(item);
+    if (new Date(expiry) > new Date()) return data;
+    localStorage.removeItem(key); // Remove expired data
+    return null;
   };
 
 export default function Dashboard() {
@@ -19,12 +23,11 @@ export default function Dashboard() {
   const [weatherData, setWeatherData] = useState(null);
   const [forecast, setForecast] = useState(null)
   const [error, setError] = useState(null);
-
   
 
   const parseMarkdown = (text) => {
     const lines = text.split('\n').map((line, index) => {
-        if (line!=''){
+        if (line.trim()!=''){
       const parsedLine = line
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
         .replace(/\*(.*?)\*/g, '<em>$1</em>').replace('-',''); 
@@ -36,6 +39,14 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
+        const localData = getLocalStorage('weatherData');
+        if (localData) {
+          const { result, weatherData: w, forecast: f } = localData;
+          setSuggestions(parseMarkdown(result));
+          setWeatherData(w);
+          setForecast(f);
+          return;
+        }
         navigator.geolocation.getCurrentPosition(async (position) => {
           const lat = position.coords.latitude;
           const long = position.coords.longitude;
@@ -53,7 +64,8 @@ export default function Dashboard() {
             setSuggestions(parseMarkdown(s));
             setWeatherData(w);
             setForecast(f)
-            
+            setLocalStorage('weatherData', { result: s, weatherData: w, forecast: f });
+
           } else {
             const e = await response.json();
             setError(e.error);
@@ -76,20 +88,29 @@ export default function Dashboard() {
   }
 
   return (
-    <div className='grid grid-cols-3 gap-6 p-6'>
-      {/* Suggestions section */}
-      <div className='col-span-1'>
-        <h3 className="text-2xl font-bold mb-4">Today's Suggestions:</h3>
-        <ul className="space-y-2">
-          {suggestions.map((suggestion, index) => (
-            <li key={index} className="text-lg">{suggestion}</li>
-          ))}
-        </ul>
+    <div className='grid grid-cols-1 md:grid-cols-3 gap-6 p-6'>
+  {/* Suggestions section */}
+  <div className='col-span-1 bg-gradient-to-br from-gray-900 to-black rounded-lg shadow-lg p-4'>
+    <h3 className="text-2xl font-bold mb-4 text-gray-200">Today's Suggestions:</h3>
+    <ul className="space-y-3">
+      {suggestions.map((suggestion, index) => (
+        <p key={index} className="text-lg text-white  border-b pb-2 last:border-none">{suggestion}</p>
+      ))}
+    </ul>
+  </div>
+
+  <div className='col-span-1 md:col-span-2 flex flex-col space-y-6'>
+    {weatherData && (
+      <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-lg p-4">
+        <Weather weatherData={weatherData} />
       </div>
-      <div className='col-span-2 flex flex-col'>
-        {weatherData && <Weather weatherData={weatherData} />}
-        {forecast && <Forecast forecast={forecast} />}
+    )}
+    {forecast && (
+      <div className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg shadow-lg p-4">
+        <Forecast forecast={forecast} />
       </div>
-    </div>
+    )}
+  </div>
+</div>
   );
 }

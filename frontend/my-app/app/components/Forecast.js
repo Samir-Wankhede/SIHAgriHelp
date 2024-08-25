@@ -21,7 +21,7 @@ const Styles = {
     },
     'Rain': {
       icon: <FontAwesomeIcon icon={faCloudShowersHeavy} style={{ color: 'blue' ,fontSize: '20'}} />,
-      gradient: 'bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600', 
+      gradient: 'bg-gradient-to-br from-blue-300 via-blue-400 to-blue-600', 
     },
     'Drizzle': {
       icon: <FontAwesomeIcon icon={faCloudRain} style={{ color: 'lightgray',fontSize: '20' }} />,
