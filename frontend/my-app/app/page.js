@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import Weather from './components/Weather'
-import Forecast from './components/Forecast';
+import Weather from '@/components/Weather'
+import Forecast from '@/components/Forecast';
 
 const setLocalStorage = (key, data) => {
     const now = new Date();
