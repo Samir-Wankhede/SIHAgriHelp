@@ -11,27 +11,27 @@ const Styles = {
     gradient: 'bg-gradient-to-br from-blue-100 via-blue-200 to-blue-500', 
   },
   'Clear': {
-    icon: <FontAwesomeIcon icon={faSun} style={{ color: 'yellow' }} />,
+    icon: <FontAwesomeIcon icon={faSun} style={{ color: 'yellow',fontSize: '100px' }} />,
     gradient: 'bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600', 
   },
   'Atmosphere': {
-    icon: <FontAwesomeIcon icon={faSmog} style={{ color: 'gray' }} />,
+    icon: <FontAwesomeIcon icon={faSmog} style={{ color: 'gray',fontSize: '100px' }} />,
     gradient: 'bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500', 
   },
   'Snow': {
-    icon: <FontAwesomeIcon icon={faSnowflake} style={{ color: 'lightblue' }} />,
+    icon: <FontAwesomeIcon icon={faSnowflake} style={{ color: 'lightblue', fontSize: '100px' }} />,
     gradient: 'bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400', 
   },
   'Rain': {
-    icon: <FontAwesomeIcon icon={faCloudShowersHeavy} style={{ color: 'blue' }} />,
+    icon: <FontAwesomeIcon icon={faCloudShowersHeavy} style={{ color: 'blue',fontSize: '100px' }} />,
     gradient: 'bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600', 
   },
   'Drizzle': {
-    icon: <FontAwesomeIcon icon={faCloudRain} style={{ color: 'lightgray' }} />,
+    icon: <FontAwesomeIcon icon={faCloudRain} style={{ color: 'lightgray',fontSize: '100px' }} />,
     gradient: 'bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500', 
   },
   'Thunderstorm': {
-    icon: <FontAwesomeIcon icon={faBolt} style={{ color: 'yellow' }} />,
+    icon: <FontAwesomeIcon icon={faBolt} style={{ color: 'yellow',fontSize: '100px' }} />,
     gradient: 'bg-gradient-to-br from-gray-800 via-gray-900 to-black', 
   }
   }

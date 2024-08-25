@@ -76,7 +76,7 @@ export const today_details=async(req,res)=>{
         });
 
         console.log(dailyAverages);
-        return res.status(200).json({result, weatherData, dailyAverages})
+        return res.status(200).json({result, weatherData, forecast: dailyAverages})
     }
     catch(e){
         return res.status(400).json(e)

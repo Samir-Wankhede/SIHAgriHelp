@@ -53,6 +53,7 @@ export default function Dashboard() {
             setSuggestions(parseMarkdown(s));
             setWeatherData(w);
             setForecast(f)
+            
           } else {
             const e = await response.json();
             setError(e.error);
@@ -85,8 +86,7 @@ export default function Dashboard() {
           ))}
         </ul>
       </div>
-      {/* Weather and Forecast section */}
-      <div className='col-span-2'>
+      <div className='col-span-2 flex flex-col'>
         {weatherData && <Weather weatherData={weatherData} />}
         {forecast && <Forecast forecast={forecast} />}
       </div>
