@@ -43,22 +43,22 @@ export default function GovtSchemes() {
   }
 
   return (
-    <div className="p-4 text-white">
+    <div className="p-4 text-white bg-black min-h-screen">
       {state ? (
         <>
-          <h2 className="text-2xl font-semibold mb-4">Schemes in {state}</h2>
+          <h2 className="text-3xl font-semibold mb-6">Schemes in {state}</h2>
           {stateSchemes.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {stateSchemes.map((scheme, index) => (
-                <div key={index} className="border p-4 rounded-md shadow-md">
-                  <h3 className="text-lg font-semibold">{scheme.name_of_scheme}</h3>
-                  <p>{scheme.description}</p>
-                  <p className="font-medium mt-2">Eligibility: {scheme.eligibility}</p>
+                <div key={index} className="bg-gray-800 border border-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <h3 className="text-xl font-bold text-blue-400 mb-2">{scheme.name_of_scheme}</h3>
+                  <p className="text-gray-300 mb-4">{scheme.description}</p>
+                  <p className="font-medium text-gray-400 mb-4">Eligibility: {scheme.eligibility}</p>
                   <a
                     href={scheme.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-500 hover:text-blue-300 underline"
                   >
                     More Information
                   </a>
@@ -75,19 +75,19 @@ export default function GovtSchemes() {
 
       {IndiaSchemes ? (
         <>
-          <h2 className="text-2xl font-semibold mb-4 mt-8">Schemes in India</h2>
+          <h2 className="text-3xl font-semibold mb-6 mt-12">Schemes in India</h2>
           {IndiaSchemes.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {IndiaSchemes.map((scheme, index) => (
-                <div key={index} className="border p-4 rounded-md shadow-md">
-                  <h3 className="text-lg font-semibold">{scheme.name_of_scheme}</h3>
-                  <p>{scheme.description}</p>
-                  <p className="font-medium mt-2">Eligibility: {scheme.eligibility}</p>
+                <div key={index} className="bg-gray-800 border border-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <h3 className="text-xl font-bold text-blue-400 mb-2">{scheme.name_of_scheme}</h3>
+                  <p className="text-gray-300 mb-4">{scheme.description}</p>
+                  <p className="font-medium text-gray-400 mb-4">Eligibility: {scheme.eligibility}</p>
                   <a
                     href={scheme.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-500 hover:text-blue-300 underline"
                   >
                     More Information
                   </a>
