@@ -51,7 +51,7 @@ export default function ResultPage() {
                 <div className="flex justify-center w-full">
                     <button
                         onClick={handleGoBack}
-                        className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-all duration-300"
+                        className="bg-blue-800 text-white py-2 px-4 rounded-md hover:bg-blue-900 transition-all duration-300"
                     >
                         Go Back to Crop Data Form
                     </button>

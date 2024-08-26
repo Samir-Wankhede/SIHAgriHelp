@@ -88,130 +88,131 @@ const CropsPage = () => {
   }
 
   return (
-      <div className="min-h-screen flex items-center justify-center">
-          <div className="max-w-4xl w-full p-8 bg-white bg-opacity-80 text-black rounded-lg shadow-lg">
-              <h1 className="text-3xl font-bold text-center mb-6">Crop Data Form</h1>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="flex flex-col">
-                      <label htmlFor="crop" className="text-lg font-medium mb-2">Crop:</label>
-                      <select
-                          name="crop"
-                          value={formData.crop}
-                          onChange={handleChange}
-                          className="border border-gray-300 p-2 rounded-md"
-                          required
-                      >
-                          <option value="">Select Crop</option>
-                          {crops.map((crop, index) => (
-                              <option key={index} value={crop}>{crop}</option>
-                          ))}
-                      </select>
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="cropYear" className="text-lg font-medium mb-2">Crop Year:</label>
-                      <input
-                          type="number"
-                          name="cropYear"
-                          value={formData.cropYear}
-                          onChange={handleChange}
-                          className="border border-gray-300 p-2 rounded-md"
-                          required
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="season" className="text-lg font-medium mb-2">Season:</label>
-                      <select
-                          name="season"
-                          value={formData.season}
-                          onChange={handleChange}
-                          className="border border-gray-300 p-2 rounded-md"
-                          required
-                      >
-                          <option value="">Select Season</option>
-                          {seasons.map((season, index) => (
-                              <option key={index} value={season}>{season}</option>
-                          ))}
-                      </select>
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="state" className="text-lg font-medium mb-2">State:</label>
-                      <select
-                          name="state"
-                          value={formData.state}
-                          onChange={handleChange}
-                          className="border border-gray-300 p-2 rounded-md"
-                          required
-                      >
-                          <option value="">Select State</option>
-                          {states.map((state, index) => (
-                              <option key={index} value={state}>{state}</option>
-                          ))}
-                      </select>
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="area" className="text-lg font-medium mb-2">Area (in hectares):</label>
-                      <input
-                          type="number"
-                          name="area"
-                          value={formData.area}
-                          onChange={handleChange}
-                          className="border border-gray-300 p-2 rounded-md"
-                          required
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="production" className="text-lg font-medium mb-2">Production (in metric tons):</label>
-                      <input
-                          type="number"
-                          name="production"
-                          value={formData.production}
-                          onChange={handleChange}
-                          className="border border-gray-300 p-2 rounded-md"
-                          required
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="annualRainfall" className="text-lg font-medium mb-2">Annual Rainfall (in mm):</label>
-                      <input
-                          type="number"
-                          name="annualRainfall"
-                          value={formData.annualRainfall}
-                          onChange={handleChange}
-                          className="border border-gray-300 p-2 rounded-md"
-                          required
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="fertilizer" className="text-lg font-medium mb-2">Fertilizer (in kilograms):</label>
-                      <input
-                          type="number"
-                          name="fertilizer"
-                          value={formData.fertilizer}
-                          onChange={handleChange}
-                          className="border border-gray-300 p-2 rounded-md"
-                          required
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="pesticide" className="text-lg font-medium mb-2">Pesticide (in kilograms):</label>
-                      <input
-                          type="number"
-                          name="pesticide"
-                          value={formData.pesticide}
-                          onChange={handleChange}
-                          className="border border-gray-300 p-2 rounded-md"
-                          required
-                      />
-                  </div>
-                  <button
-                      type="submit"
-                      className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-all duration-300"
-                  >
-                      Submit
-                  </button>
-              </form>
-          </div>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+    <div className="max-w-4xl w-full p-8 bg-gray-800 text-white rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold text-center mb-6">Crop Data Form</h1>
+        <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="flex flex-col">
+                <label htmlFor="crop" className="text-lg font-medium mb-2">Crop:</label>
+                <select
+                    name="crop"
+                    value={formData.crop}
+                    onChange={handleChange}
+                    className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
+                    required
+                >
+                    <option value="">Select Crop</option>
+                    {crops.map((crop, index) => (
+                        <option key={index} value={crop}>{crop}</option>
+                    ))}
+                </select>
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="cropYear" className="text-lg font-medium mb-2">Crop Year:</label>
+                <input
+                    type="number"
+                    name="cropYear"
+                    value={formData.cropYear}
+                    onChange={handleChange}
+                    className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
+                    required
+                />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="season" className="text-lg font-medium mb-2">Season:</label>
+                <select
+                    name="season"
+                    value={formData.season}
+                    onChange={handleChange}
+                    className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
+                    required
+                >
+                    <option value="">Select Season</option>
+                    {seasons.map((season, index) => (
+                        <option key={index} value={season}>{season}</option>
+                    ))}
+                </select>
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="state" className="text-lg font-medium mb-2">State:</label>
+                <select
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                    className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
+                    required
+                >
+                    <option value="">Select State</option>
+                    {states.map((state, index) => (
+                        <option key={index} value={state}>{state}</option>
+                    ))}
+                </select>
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="area" className="text-lg font-medium mb-2">Area (in hectares):</label>
+                <input
+                    type="number"
+                    name="area"
+                    value={formData.area}
+                    onChange={handleChange}
+                    className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
+                    required
+                />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="production" className="text-lg font-medium mb-2">Production (in metric tons):</label>
+                <input
+                    type="number"
+                    name="production"
+                    value={formData.production}
+                    onChange={handleChange}
+                    className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
+                    required
+                />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="annualRainfall" className="text-lg font-medium mb-2">Annual Rainfall (in mm):</label>
+                <input
+                    type="number"
+                    name="annualRainfall"
+                    value={formData.annualRainfall}
+                    onChange={handleChange}
+                    className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
+                    required
+                />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="fertilizer" className="text-lg font-medium mb-2">Fertilizer (in kilograms):</label>
+                <input
+                    type="number"
+                    name="fertilizer"
+                    value={formData.fertilizer}
+                    onChange={handleChange}
+                    className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
+                    required
+                />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="pesticide" className="text-lg font-medium mb-2">Pesticide (in kilograms):</label>
+                <input
+                    type="number"
+                    name="pesticide"
+                    value={formData.pesticide}
+                    onChange={handleChange}
+                    className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
+                    required
+                />
+            </div>
+            <button
+                type="submit"
+                className="w-full bg-blue-800 text-white py-2 px-4 rounded-md hover:bg-blue-900 transition-all duration-300"
+            >
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+
   );
   };
 
