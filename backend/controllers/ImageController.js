@@ -2,12 +2,13 @@ import axios from "axios";
 
 const getLeafImagePrediction = async(req,res) => {
     const {plant,image} = req.body;
-    console.log(image)
+   
     try{
         const result = await axios({
             method:"POST",
             url:`${process.env.ML_SERVER}/predict-disease`,
             data:{
+                plant: plant,
                 base64_image:image,
             },
             headers:{

@@ -13,6 +13,7 @@ from PIL import Image
 import tensorflow as tf
 import base64
 import os
+import tf_keras
 
 load_dotenv()
 app = FastAPI()
@@ -94,8 +95,8 @@ def create_data_batches(X):
     return data_batch
 
 def load_model(model_path):
-    model = tf.keras.models.load_model(model_path,
-                                        custom_objects={"KerasLayer": tensorflow_hub.KerasLayer})
+    model = tf_keras.models.load_model(model_path,
+        custom_objects={"KerasLayer": tensorflow_hub.KerasLayer})
     return model
 
 @app.get("/ping")
@@ -105,9 +106,8 @@ async def ping():
 def read_base64_image(data: str) -> np.ndarray:
     try:
         image_data = base64.b64decode(data)
-        print(image_data)
         image = np.array(Image.open(BytesIO(image_data)))
-        return image
+        return image,image_data
     except Exception as e:
         raise HTTPException(status_code=400, detail="Invalid image data")
 
@@ -119,8 +119,8 @@ class ImageData(BaseModel):
 @app.post("/predict-disease")
 async def predict(image_data: ImageData):
     print('here')
-    plant = image_data['plant']
-    image = read_base64_image(image_data.base64_image)
+    plant = image_data.plant
+    image, image_data = read_base64_image(image_data.base64_image)
     
     if plant=='Potato':
         img_batch = np.expand_dims(image, 0)
@@ -133,15 +133,17 @@ async def predict(image_data: ImageData):
             'confidence': float(confidence)*100
         }
     if plant=='Sugarcane':
+        with open("decoded_image.jpeg", "wb") as file:
+            file.write(image_data) 
         loaded_model = load_model("models/20240825-04331724560420-Base_Sugarcane.h5")
-        custom_img_path = ["decoded_image.jpg"]
+        custom_img_path = ["decoded_image.jpeg"]
         custom_data = create_data_batches(custom_img_path)
         custom_preds = loaded_model.predict(custom_data)
         confidence = np.max(custom_preds) * 100
         custom_pred_label = get_pred_label(custom_preds[0])
-        response = {
-            'Predicted': custom_pred_label,
-            'Confidence': f"{confidence:2.0f}%"
+        return {
+            'class': custom_pred_label,
+            'confidence': f"{confidence:2.0f}%"
         }
 
 if __name__=="__main__":
