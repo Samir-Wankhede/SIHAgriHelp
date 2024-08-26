@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <nav className="bg-gray-900 text-gray-100 p-4 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="text-2xl font-semibold">KethiSathi</div>
+        <div className="text-2xl font-semibold">KhetiSathi</div>
         <div className="hidden md:flex items-center space-x-6">
           <a href="/" className="hover:text-gray-300 transition duration-300">Home</a>
           <a href="/govt_schemes" className="hover:text-gray-300 transition duration-300">Govt Schemes</a>
