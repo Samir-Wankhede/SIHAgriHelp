@@ -72,10 +72,10 @@ def yield_pred(input_parameters : model_input):
 
 MODEL = tf.keras.models.load_model("./models/model_1.h5")
 
-CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
+CLASS_NAMES = ["Potato Early Blight", "Potato Late Blight", "Potato Healthy"]
 
 
-unique_diseases = ['Healthy', 'Mosaic', 'RedRot', 'Rust', 'Yellow']
+unique_diseases = ['Sugarcane Healthy', 'Sugarcane Mosaic', 'Sugarcane RedRot', 'Sugarcane Rust', 'Sugarcane Yellow']
 def get_pred_label(prediction_probabs):
     return unique_diseases[np.argmax(prediction_probabs)]
 

@@ -166,13 +166,13 @@
         "cure": " Manage Tomato mosaic virus by removing and destroying infected plants, using resistant tomato varieties, and practicing crop rotation. Ensure good field sanitation, avoid handling plants when wet to prevent spreading, and clean tools and equipment to reduce virus transmission.",
         "links": []
     },
-    "Potato__Early_blight":{
+    "Potato Early Blight":{
         "description": " Early blight in potatoes, caused by Alternaria solani, is characterized by dark, concentric-ringed lesions on leaves, stems, and tubers. It leads to premature leaf death, reduced photosynthesis, and lower yields.",
         "cure": " Manage early blight by applying fungicides like chlorothalonil or copper-based products, removing and destroying infected plant debris, and practicing crop rotation with non-solanaceous plants. Improve air circulation around plants and avoid overhead irrigation to minimize humidity and prevent the spread of the disease.",
         "links": ["https://www.amazon.in/s?k=chlorothalonil+fungicide&crid=G4KP8K0RXL4H&sprefix=chlorotha%2Caps%2C190&ref=nb_sb_ss_pltr-data-refreshed_1_9,",
             "https://www.bighaat.com/search/chlorothalonil"]
     },
-    "Potato__Late_blight":{
+    "Potato Late Blight":{
         "description": " Late blight in potatoes, caused by Phytophthora infestans, leads to water-soaked lesions on leaves, stems, and tubers, often accompanied by a white, fuzzy growth on the underside of leaves. The disease can cause rapid plant decay and severe yield loss.",
         "cure": "Manage late blight by applying fungicides such as mancozeb or metalaxyl, removing and destroying infected plant material, and practicing crop rotation with non-solanaceous crops. Improve air circulation around plants, avoid overhead irrigation, and maintain good field sanitation to reduce humidity and slow the spread of the disease.",
         "links": [
@@ -180,18 +180,18 @@
             "https://www.bighaat.com/search/metaxil"
         ]
     },
-    "Sugarcane__Mosaic":{
+    "Sugarcane Mosaic":{
         "description": "Sugarcane mosaic virus causes irregular, mosaic-like patterns on sugarcane leaves, with yellow and green streaks. It can lead to reduced growth, lower yields, and stunted cane development.",
         "cure": "Manage sugarcane mosaic by using resistant varieties, removing and destroying infected plants, and practicing proper field sanitation. Implement insect control measures to manage aphid vectors and avoid planting in fields with a history of the virus.",
         "links": []
     },
-    "Sugarcane__RedRot":{
+    "Sugarcane RedRot":{
         "description": "Red rot in sugarcane, caused by Colletotrichum falcatum, leads to reddish-brown, sunken lesions on the cane, which may turn into a reddish or orange rot. It results in reduced juice quality, lower yields, and can cause significant damage to the cane.",
         "cure": "Manage red rot by using resistant sugarcane varieties, removing and destroying infected cane, and practicing crop rotation. Ensure good field sanitation, avoid excessive moisture, and improve drainage to reduce disease incidence. Applying fungicides can also help control the spread.",
         "links": ["https://www.amazon.in/s?k=funcidies&crid=B3CWMRQC1OEE&sprefix=funcidie%2Caps%2C193&ref=nb_sb_noss",
                   "https://www.bighaat.com/search/fungicides"]
     },
-    "Sugarcane__Rust":{
+    "Sugarcane Rust":{
         "description": " Rust in sugarcane, caused by Puccinia melanocephala, manifests as reddish-brown pustules on leaves and stems, which can lead to reduced photosynthesis, lower sugar content, and diminished yields.",
         "cure": "Manage rust by using resistant sugarcane varieties, applying fungicides like tebuconazole or propiconazole, and practicing crop rotation. Ensure good field sanitation by removing infected plant debris and improving air circulation to reduce humidity and prevent the spread of the disease.",
         "links": [
@@ -200,7 +200,7 @@
             "https://www.bighaat.com/search/propiconazole"
         ]
     },
-    "Sugarcane__Yellow":{
+    "Sugarcane Yellow":{
         "description": "Sugarcane yellow disease, often caused by the sugarcane yellow leaf virus (ScYLV) or other viral pathogens, results in yellowing of leaves, stunted growth, and reduced cane yield and quality.",
         "cure": "Manage sugarcane yellow disease by using resistant varieties, removing and destroying infected plants, and practicing good field sanitation. Implement vector control measures to manage insects that transmit the virus, and avoid planting in fields with a history of the disease.",
         "links": []
