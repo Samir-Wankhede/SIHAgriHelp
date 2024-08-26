@@ -5,9 +5,12 @@ import pickle
 import json
 import numpy as np
 import bz2file as bz2
-
+import uvicorn
+from dotenv import load_dotenv
+import os
+load_dotenv()
 app = FastAPI()
-
+PORT = int(os.getenv('PORT'))
 origins = ["*"]
 
 app.add_middleware(
@@ -57,7 +60,9 @@ def yield_pred(input_parameters : model_input):
     a=np.array(input_list)
     a = a.reshape(1, -1)
     prediction = model.predict(a)
-   
-
+    print(prediction)
     return prediction[0]
 
+if __name__=="__main__":
+    uvicorn.run(app, host='localhost', port=PORT)
+    print("yield server listening")
