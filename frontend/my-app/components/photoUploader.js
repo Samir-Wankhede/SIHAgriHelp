@@ -2,6 +2,7 @@
 import React,{useState,useRef} from "react"
 import Logo from "../public/plant.png"
 import Webcam from "react-webcam";
+import Suggestions from "./Suggestions";
 
 
 const PhotoUploader = () => {
@@ -16,19 +17,26 @@ const PhotoUploader = () => {
     };     
     const handleSubmit = async() => {
         console.log('clicked')
+        console.log(Img)
+        
         try{
-            const response = await fetch("http://localhost:4000/api/leaf",{
+            const base64StartIndex = Img.indexOf('/9j');
+
+            const base64ImageData = Img.substring(base64StartIndex);
+            const response = await fetch(`${process.env.SERVER_URI}/api/leaf`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     plant: plant,
-                    image: Img
+                    image: base64ImageData
                 })
             })
             if (response.ok){
-                setResp(response.json());
+                const result = await response.json()
+                console.log(result.result)
+                setResp(result);
             }
         }catch(err){
             console.log(err);
@@ -112,11 +120,28 @@ const PhotoUploader = () => {
                 </div>
             </div>
             :
-            <div className="absolute h-[80vh] md:h-[60vh] w-[95vw] md:w-[80vw] flex flex-col items-center justify-center bg-gray-900 rounded-lg">
-                <label className="text-white text-2xl">Status: {resp.status}</label>
-                <label className="text-white text-2xl">Confidence in prediction: {resp.confidence}</label>
-                <button onClick={()=>setResp(null)} className="w-full bg-white disabled:bg-slate-800 disabled:text-white rounded-lg text-gray-900 px-8 py-4 disabled:animate-pulse">Check Again!</button>
+            <div className="flex flex-col md:flex-row items-center justify-center bg-gray-900 rounded-lg p-8 w-2/3">
+   
+                <div className="flex-1 flex flex-col items-center justify-center ">
+                    <img
+                        src={Img}
+                        alt='Plant Pic'
+                        className={`h-80 w-80 p-4 max-w-full max-h-full ${!camOn ? 'visible' : 'invisible'}`}
+                    />
+                    <label className="text-white text-2xl mb-2">Disease: {resp.class}</label>
+                    <label className="text-white text-2xl mb-4">Confidence in prediction: {resp.confidence}</label>
+                    <button
+                        onClick={() => setResp(null)}
+                        className="w-full md:w-1/2 bg-white text-gray-900 rounded-lg px-8 py-4 hover:bg-gray-200"
+                    >
+                        Check Again!
+                    </button>
+                </div>
+                <div className="flex-1 bg-gray-800 p-6 rounded-lg">
+                    <Suggestions disease={resp.class} />
+                </div>
             </div>
+
         }
         </div>
     );
