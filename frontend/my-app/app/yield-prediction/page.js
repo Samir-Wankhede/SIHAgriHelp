@@ -70,7 +70,7 @@ const CropsPage = () => {
               const result = await response.json();
               const data = { pred : result.prediction };
               const queryString = new URLSearchParams(data).toString();
-              router.push(`/yield-prediction/result${queryString}`)
+              router.push(`/yield-prediction/result?${queryString}`)
           }
           else{
               const result = await response.json()
