@@ -1,6 +1,7 @@
 // controllers/yieldController.js
+import { states, crops, seasons } from "../inputMap.js";
 
-export const submitCrop = (req, res) => {
+export const submitCrop = async(req, res) => {
     if (req.method === 'POST') {
       const {
         crop,
@@ -13,24 +14,42 @@ export const submitCrop = (req, res) => {
         fertilizer,
         pesticide,
       } = req.body;
-  
-      
+      console.log(req.body)
+
       const parsedData = {
-        crop,
-        cropYear: parseInt(cropYear, 10),
-        season,
-        state,
-        area: parseFloat(area),
-        production: parseFloat(production),
-        annualRainfall: parseFloat(annualRainfall),
-        fertilizer: parseFloat(fertilizer),
-        pesticide: parseFloat(pesticide),
+        Crop: crops[crop],
+        Crop_Year: parseInt(cropYear, 10),
+        Season: seasons[season],
+        State: states[state],
+        Area: parseFloat(area),
+        Production: parseFloat(production),
+        Annual_Rainfall: parseFloat(annualRainfall),
+        Fertilizer: parseFloat(fertilizer),
+        Pesticide: parseFloat(pesticide),
       };
   
       console.log('Parsed Data:', parsedData);
-  
-      
-      res.status(200).json({ message: 'Data received and parsed successfully', data: parsedData });
+      try{
+        const response = await fetch(`${process.env.YIELD_SERVER}/yield_prediction`, {
+          method: "POST",
+          headers:{
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(parsedData)
+        })
+        if (response.ok){
+          const prediction = await response.json()
+          console.log(prediction)
+          res.status(200).json({prediction: prediction})
+        }
+        else{
+          res.status(400).json({error: "Incorrect Data"})
+        }
+        
+      }catch(e){
+        console.log(e)
+        res.status(500).json({error: "Server Error"})
+      }
     } else {
       res.status(405).json({ message: 'Method not allowed' });
     }
