@@ -7,11 +7,9 @@ import Papa from 'papaparse';
 const CropsPage = () => {
     const [formData, setFormData] = useState({
       crop: '',
-      cropYear: '',
       season: '',
       state: '',
       area: '',
-      production: '',
       annualRainfall: '',
       fertilizer: '',
       pesticide: '',
@@ -107,7 +105,7 @@ const CropsPage = () => {
                     ))}
                 </select>
             </div>
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
                 <label htmlFor="cropYear" className="text-lg font-medium mb-2">Crop Year:</label>
                 <input
                     type="number"
@@ -117,7 +115,7 @@ const CropsPage = () => {
                     className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
                     required
                 />
-            </div>
+            </div> */}
             <div className="flex flex-col">
                 <label htmlFor="season" className="text-lg font-medium mb-2">Season:</label>
                 <select
@@ -159,7 +157,7 @@ const CropsPage = () => {
                     required
                 />
             </div>
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
                 <label htmlFor="production" className="text-lg font-medium mb-2">Production (in metric tons):</label>
                 <input
                     type="number"
@@ -169,7 +167,7 @@ const CropsPage = () => {
                     className="border border-gray-600 bg-gray-700 p-2 rounded-md text-white"
                     required
                 />
-            </div>
+            </div> */}
             <div className="flex flex-col">
                 <label htmlFor="annualRainfall" className="text-lg font-medium mb-2">Annual Rainfall (in mm):</label>
                 <input

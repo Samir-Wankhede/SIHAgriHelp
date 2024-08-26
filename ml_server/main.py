@@ -31,19 +31,19 @@ app.add_middleware(
 class model_input(BaseModel):
     
     Crop : int
-    Crop_Year : int
     Season : int
     State : int
     Area : float
-    Production : int
     Annual_Rainfall :  float
     Fertilizer :  float
     Pesticide :  float
     
 
 # loading the saved model
-model = bz2.BZ2File("yield_model_cmp.pbz2", "rb")
-model = pickle.load(model)
+# model = bz2.BZ2File("yield_model_cmp.pbz2", "rb")
+# model = pickle.load(model)
+# with open("yield_model.pkl","rb") as f:
+model=pickle.load(open('./yield_model_1.pkl', 'rb'))
 
 @app.post('/yield_prediction')
 def yield_pred(input_parameters : model_input):
@@ -52,17 +52,15 @@ def yield_pred(input_parameters : model_input):
     input_dictionary = json.loads(input_data)
     
     crop = input_dictionary['Crop']
-    cy = input_dictionary['Crop_Year']
     season = input_dictionary['Season']
     state = input_dictionary['State']
     area = input_dictionary['Area']
-    prod = input_dictionary['Production']
     ar = input_dictionary['Annual_Rainfall']
     fert = input_dictionary['Fertilizer']
     pest = input_dictionary['Pesticide']
 
 
-    input_list = [crop,cy,season,state,area,prod,ar,fert,pest]
+    input_list = [crop,season,state,area,ar,fert,pest]
     
     a=np.array(input_list)
     a = a.reshape(1, -1)
