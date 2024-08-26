@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import CropForm from '../../components/CropForm'; 
 

@@ -1,4 +1,5 @@
 // controllers/yieldController.js
+import { states, crops, seasons } from "../inputMap.js";
 
 export const submitCrop = (req, res) => {
     if (req.method === 'POST') {
@@ -13,13 +14,13 @@ export const submitCrop = (req, res) => {
         fertilizer,
         pesticide,
       } = req.body;
-  
+      console.log(req.body)
       
       const parsedData = {
-        crop,
+        crop: crops[crop],
         cropYear: parseInt(cropYear, 10),
-        season,
-        state,
+        season: seasons[season],
+        state: states[state],
         area: parseFloat(area),
         production: parseFloat(production),
         annualRainfall: parseFloat(annualRainfall),

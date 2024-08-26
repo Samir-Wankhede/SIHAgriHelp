@@ -24,7 +24,14 @@ const CropForm = () => {
             download: true,
             header: true,
             complete: (result) => {
-                const data = result.data;
+                const data = result.data.map(item => {
+                    // Trim trailing spaces from each value in the item object
+                    const trimmedItem = {};
+                    Object.keys(item).forEach(key => {
+                        trimmedItem[key] = item[key].trim();
+                    });
+                    return trimmedItem;
+                });
                 const uniqueCrops = [...new Set(data.map(item => item.Crop))];
                 const uniqueStates = [...new Set(data.map(item => item.State))];
                 const uniqueSeasons = [...new Set(data.map(item => item.Season))];
@@ -48,7 +55,7 @@ const CropForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:4005/api/submit-crop', {
+            const response = await fetch('http://localhost:4005/yield/submit-crop', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
