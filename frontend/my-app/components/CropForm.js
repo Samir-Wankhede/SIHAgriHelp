@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Papa from 'papaparse';
 
 const CropForm = () => {
@@ -18,6 +19,8 @@ const CropForm = () => {
     const [crops, setCrops] = useState([]);
     const [states, setStates] = useState([]);
     const [seasons, setSeasons] = useState([]);
+    const [error, setError] = useState(null)
+    const router = useRouter();
 
     useEffect(() => {
         Papa.parse('/archive/crop_yield.csv', {
@@ -62,13 +65,26 @@ const CropForm = () => {
                 },
                 body: JSON.stringify(formData),
             });
-
-            const result = await response.json();
+            if (response.ok){
+                const result = await response.json();
+                const data = { pred : result.prediction };
+                const queryString = new URLSearchParams(data).toString();
+                router.push(`/yield-prediction/result${queryString}`)
+            }
+            else{
+                const result = await response.json()
+                setError(result.error)
+            }
             console.log('Result:', result);
         } catch (error) {
             console.error('Error submitting data', error);
         }
     };
+
+    if (error){
+        alert("Error Occured : ", error)
+
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center">
