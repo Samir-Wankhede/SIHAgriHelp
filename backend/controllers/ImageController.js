@@ -16,7 +16,7 @@ const getLeafImagePrediction = async(req,res) => {
             }
         });
         console.log(result)
-        res.status(200).json({result: result.data.class});
+        res.status(200).json({class: result.data.class, confidence: result.data.confidence});
     }catch(e){
         console.log(e)
     }

@@ -22,7 +22,6 @@ const PhotoUploader = () => {
             const base64StartIndex = Img.indexOf('/9j');
 
             const base64ImageData = Img.substring(base64StartIndex);
-            console.log(base64ImageData)
             const response = await fetch(`${process.env.SERVER_URI}/api/leaf`,{
                 method: "POST",
                 headers: {
@@ -36,7 +35,7 @@ const PhotoUploader = () => {
             if (response.ok){
                 const result = await response.json()
                 console.log(result.result)
-                setResp(result.result);
+                setResp(result);
             }
         }catch(err){
             console.log(err);
@@ -121,10 +120,10 @@ const PhotoUploader = () => {
             </div>
             :
             <div className="absolute h-[80vh] md:h-[60vh] w-[95vw] md:w-[80vw] flex flex-col items-center justify-center bg-gray-900 rounded-lg">
-                <img src={(Img=="")?Logo.src:Img} alt='Plant Pic'  className={`h-auto w-auto p-4 max-w-full max-h-full ${!camOn?'visible':'invisible'}`}/>     
-                <label className="text-white text-2xl">Disease: {resp}</label>
-                {/* <label className="text-white text-2xl">Confidence in prediction: {resp.confidence}</label> */}
-                <button onClick={()=>setResp(null)} className="w-full bg-white disabled:bg-slate-800 disabled:text-white rounded-lg text-gray-900 px-8 py-4 disabled:animate-pulse">Check Again!</button>
+                <img src={Img} alt='Plant Pic'  className={`h-auto w-auto p-4 max-w-full max-h-full ${!camOn?'visible':'invisible'}`}/>     
+                <label className="text-white text-2xl">Disease: {resp.class}</label>
+                <label className="text-white text-2xl">Confidence in prediction: {resp.confidence}</label>
+                <button onClick={()=>setResp(null)} className="w-1/2 bg-white mt-5 disabled:bg-slate-800 disabled:text-white rounded-lg text-gray-900 px-8 py-4 disabled:animate-pulse">Check Again!</button>
             </div>
         }
         </div>
