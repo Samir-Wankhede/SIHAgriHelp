@@ -16,19 +16,27 @@ const PhotoUploader = () => {
     };     
     const handleSubmit = async() => {
         console.log('clicked')
+        console.log(Img)
+        
         try{
-            const response = await fetch("http://localhost:4000/api/leaf",{
+            const base64StartIndex = Img.indexOf('/9j');
+
+            const base64ImageData = Img.substring(base64StartIndex);
+            console.log(base64ImageData)
+            const response = await fetch(`${process.env.SERVER_URI}/api/leaf`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     plant: plant,
-                    image: Img
+                    image: base64ImageData
                 })
             })
             if (response.ok){
-                setResp(response.json());
+                const result = await response.json()
+                console.log(result.result)
+                setResp(result.result);
             }
         }catch(err){
             console.log(err);
@@ -113,8 +121,9 @@ const PhotoUploader = () => {
             </div>
             :
             <div className="absolute h-[80vh] md:h-[60vh] w-[95vw] md:w-[80vw] flex flex-col items-center justify-center bg-gray-900 rounded-lg">
-                <label className="text-white text-2xl">Status: {resp.status}</label>
-                <label className="text-white text-2xl">Confidence in prediction: {resp.confidence}</label>
+                <img src={(Img=="")?Logo.src:Img} alt='Plant Pic'  className={`h-auto w-auto p-4 max-w-full max-h-full ${!camOn?'visible':'invisible'}`}/>     
+                <label className="text-white text-2xl">Disease: {resp}</label>
+                {/* <label className="text-white text-2xl">Confidence in prediction: {resp.confidence}</label> */}
                 <button onClick={()=>setResp(null)} className="w-full bg-white disabled:bg-slate-800 disabled:text-white rounded-lg text-gray-900 px-8 py-4 disabled:animate-pulse">Check Again!</button>
             </div>
         }

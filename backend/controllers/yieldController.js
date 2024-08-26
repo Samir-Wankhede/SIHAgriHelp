@@ -30,7 +30,7 @@ export const submitCrop = async(req, res) => {
   
       console.log('Parsed Data:', parsedData);
       try{
-        const response = await fetch(`${process.env.YIELD_SERVER}/yield_prediction`, {
+        const response = await fetch(`${process.env.ML_SERVER}/yield_prediction`, {
           method: "POST",
           headers:{
             "Content-Type": "application/json"

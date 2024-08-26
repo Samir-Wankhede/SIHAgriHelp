@@ -9,13 +9,12 @@ export default function Navbar() {
   return (
     <nav className="bg-gray-900 text-gray-100 p-4 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="text-2xl font-semibold">AgriHelp</div>
+        <div className="text-2xl font-semibold">KethiSathi</div>
         <div className="hidden md:flex items-center space-x-6">
           <a href="/" className="hover:text-gray-300 transition duration-300">Home</a>
           <a href="/govt_schemes" className="hover:text-gray-300 transition duration-300">Govt Schemes</a>
           <a href="/yield-prediction" className="hover:text-gray-300 transition duration-300">Yield Prediction</a>
           <a href="/disease-prediction" className="hover:text-gray-300 transition duration-300">Disease Prediction</a>
-          <a href="/settings" className="hover:text-gray-300 transition duration-300">Settings</a>
         </div>
         <div className="md:hidden">
           <button 
@@ -33,7 +32,6 @@ export default function Navbar() {
         <a href="/govt_schemes" className="block py-2 px-4 hover:bg-gray-800">Govt Schemes</a>
         <a href="/yield-prediction" className="block py-2 px-4 hover:bg-gray-800">Yield Prediction</a>
         <a href="/disease-prediction" className="block py-2 px-4 hover:bg-gray-800">Disease Prediction</a>
-        <a href="/settings" className="block py-2 px-4 hover:bg-gray-800">Settings</a>
       </div>
     </nav>
   );
